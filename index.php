@@ -8,4 +8,6 @@ header('Location:login.php');
 
 }
 
+echo('Hello ' . $_SESSION['user']['nom'])
+
 ?>

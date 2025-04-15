@@ -28,7 +28,7 @@ function checkUser($email,$connection){
     $email = htmlspecialchars($email);
     $checkSql = "SELECT * FROM `users` WHERE email = :email";
     $checkStmt = $connection-> prepare($checkSql);
-    $checkStmt-> bindParam(':email',$email);
+    $checkStmt-> bindParam(':email',htmlspecialchars($email));
     $checkStmt->execute();
     $checkResult = $checkStmt->fetch(PDO::FETCH_ASSOC);
 
@@ -44,6 +44,22 @@ function checkUser($email,$connection){
 
 function login($email,$password,$connection){
 
+    $mail = htmlspecialchars($email);
+    $pass = password_hash($password,PASSWORD_DEFAULT);
+
+    $loginSql = "SELECT * FROM `users` WHERE email = :email";
+    $loginStmt = $connection-> prepare($loginSql);
+    $loginStmt-> bindParam(':email',$mail);
+    $loginStmt->execute();
+    $LoginResult = $loginStmt->fetch(PDO::FETCH_ASSOC);
+
+    if(!empty($LoginResult) && password_verify($password,$LoginResult['password'])){
+        return $LoginResult;
+    }else{
+        return false;
+    }
+
+    
     
 
 }

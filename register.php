@@ -4,6 +4,10 @@ require 'config.php';
 include 'user.php';
 
 
+if($_SESSION['user']){
+
+    header('Location:index.php');
+}
 
 if(isset($_POST['regBtn'])){
 
@@ -41,7 +45,7 @@ if(isset($_POST['regBtn'])){
     if(empty($errors)){
 
         $user = [
-            'fullName' => $User_fullName,
+            'nom' => $User_fullName,
             'email' => $User_email,
             'password' => $User_password,
         ];
