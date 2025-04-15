@@ -21,6 +21,27 @@ function addUser($user,$connection){
 
 }
 
+function checkUser($email,$connection){
+
+    $isAvailableEmail = false;
+
+    $email = htmlspecialchars($email);
+    $checkSql = "SELECT * FROM `users` WHERE email = :email";
+    $checkStmt = $connection-> prepare($checkSql);
+    $checkStmt-> bindParam(':email',$email);
+    $checkStmt->execute();
+    $checkResult = $checkStmt->fetch(PDO::FETCH_ASSOC);
+
+    if(!empty($checkResult)){
+
+        $isAvailableEmail = true;
+
+    }
+
+    return $isAvailableEmail;
+
+}
+
 function login($email,$password,$connection){
 
     

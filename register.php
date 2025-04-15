@@ -3,6 +3,8 @@
 require 'config.php';
 include 'user.php';
 
+
+
 if(isset($_POST['regBtn'])){
 
     $User_fullName = $_POST['fullName'];
@@ -17,6 +19,11 @@ if(isset($_POST['regBtn'])){
     
     if (empty($User_email)) {
         $errors['email'] = 'Email address is required.';
+    }else{
+        $isEmailAvaillable = checkUser($User_email,$pdo);
+        if($isEmailAvaillable){
+            $errors['email'] = 'This email address is already in use. Please choose a different one.';
+        }
     }
     
     if (empty($User_password)) {
