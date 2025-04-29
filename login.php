@@ -5,7 +5,7 @@ include 'user.php';
 
 $errors = [];
 
-if($_SESSION['user']){
+if(isset($_SESSION['user'])){
 
     header('Location:index.php');
 }

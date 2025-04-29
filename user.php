@@ -2,7 +2,7 @@
 
 function addUser($user,$connection){
 
-    $fullName = htmlspecialchars($user['fullName']);
+    $fullName = htmlspecialchars($user['nom']);
     $email = htmlspecialchars($user['email']);
     $password = password_hash($user['password'],PASSWORD_DEFAULT);
 
@@ -45,7 +45,6 @@ function checkUser($email,$connection){
 function login($email,$password,$connection){
 
     $mail = htmlspecialchars($email);
-    $pass = password_hash($password,PASSWORD_DEFAULT);
 
     $loginSql = "SELECT * FROM `users` WHERE email = :email";
     $loginStmt = $connection-> prepare($loginSql);
@@ -74,9 +73,67 @@ function soldUser($connection){
 
 function detailsUser($connection){
 
-    
+    $userEmail = $_SESSION['user']['email'];
+
+    $userSql = "SELECT * FROM users WHERE email = :email";
+    $userStmt = $connection->prepare($userSql);
+    $userStmt->bindParam(':email',$userEmail);
+    $userStmt->execute();
+    $user = $userStmt->fetch(PDO::FETCH_ASSOC);
+
+    $_SESSION['user']['id'] = $user['id'];
 
 }
 
 
+
+function updateUser($connection, $newUserInfo)
+{
+    $fullName = htmlspecialchars($newUserInfo['nom']);
+    $email = htmlspecialchars($newUserInfo['email']);
+    $password = $newUserInfo['password'];
+    $confirmPassword = $newUserInfo['confirm_password'];
+
+    $userId = $_SESSION['user']['id'];
+    $currentEmail = $_SESSION['user']['email'];
+
+    // تحقق إذا أراد تغيير البريد الإلكتروني
+    if ($email !== $currentEmail) {
+        if (checkUser($email, $connection)) {
+            return "This email is already in use. Please choose another one.";
+        }
+    }
+
+    // إنشاء كود التحديث
+    $updateSql = "UPDATE users SET nom = :fullName, email = :email";
+
+    if (!empty($password) && !empty($confirmPassword)) {
+        if ($password !== $confirmPassword) {
+            return "Passwords do not match.";
+        }
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $updateSql .= ", password = :password";
+    }
+
+    $updateSql .= " WHERE id = :id";
+
+    $updateStmt = $connection->prepare($updateSql);
+
+    $updateStmt->bindParam(':fullName', $fullName);
+    $updateStmt->bindParam(':email', $email);
+    if (!empty($password) && !empty($confirmPassword)) {
+        $updateStmt->bindParam(':password', $hashedPassword);
+    }
+    $updateStmt->bindParam(':id', $userId, PDO::PARAM_INT);
+
+    $updateStmt->execute();
+
+    $_SESSION['user']['nom'] = $fullName;
+    $_SESSION['user']['email'] = $email;
+
+    return true;
+}
+
 ?>
+
+

@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profileContainer {
+    width: 100%;
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.profileContainer h2 {
+    font-size: 26px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.profileForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup label {
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #555;
+    font-weight: 600;
+}
+
+.formGroup input {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: border 0.3s ease;
+}
+
+.formGroup input:focus {
+    border-color: #4e9af1;
+    outline: none;
+}
+
+.saveButton {
+    padding: 12px;
+    background-color: #4e9af1;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.saveButton:hover {
+    background-color: #3a7fd7;
+}
+
+.message {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2ecc71;
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .profileContainer {
+        padding: 20px;
+    }
+}
