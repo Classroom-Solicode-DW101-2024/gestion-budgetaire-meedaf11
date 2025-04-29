@@ -44,6 +44,32 @@ $userName = $_SESSION['user']['nom'];
     </div>
 </header>
 
+<section class="hero">
+  <h2>Take Control of Your Money</h2>
+  <p>Track expenses, create budgets, and reach your financial goals with ease.</p>
+  <a href="Transaction/" class="btn">Get Started</a>
+</section>
+
+<section id="features" class="features">
+  <div class="feature">
+    <h3>Track Your Spending</h3>
+    <p>Monitor every transaction and understand where your money goes.</p>
+  </div>
+  <div class="feature">
+    <h3>Smart Budgeting</h3>
+    <p>Create and manage budgets tailored to your lifestyle and goals.</p>
+  </div>
+  <div class="feature">
+    <h3>Financial Reports</h3>
+    <p>View easy-to-understand charts and summaries of your finances.</p>
+  </div>
+</section>
+
+<footer id="contact">
+  <p>&copy; <?php echo date("Y"); ?> MoneyMate. All rights reserved.</p>
+</footer>
+
+
 
 </body>
 </html>

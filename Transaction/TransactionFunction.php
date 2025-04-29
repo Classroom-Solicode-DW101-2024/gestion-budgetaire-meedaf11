@@ -18,7 +18,7 @@ function getCategoryId($nom , $type, $connection){
 
 function addTransaction($transaction,$connection){
 
-    $userID = $transaction['user_id'];
+    $userID = $_SESSION['user']['id'];
     $transactionCategory = $transaction['category_id'];
     $transactionMontant = $transaction['montant'];
     $transactionDescription = $transaction['description'];

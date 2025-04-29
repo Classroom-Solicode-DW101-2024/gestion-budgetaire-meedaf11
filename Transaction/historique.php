@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php foreach ($listOfTransaction as $transaction): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($transaction['id']); ?></td>
-                    <td><?php echo htmlspecialchars($transaction['montant']); ?> €</td>
+                    <td><?php echo htmlspecialchars($transaction['montant']); ?> DH</td>
                     <td><?php echo htmlspecialchars($transaction['description']); ?></td>
                     <td><?php echo htmlspecialchars($transaction['date_transaction']); ?></td>
                     <td>
